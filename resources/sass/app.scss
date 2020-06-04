@@ -1,0 +1,72 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+.votes, .status, .views {
+    margin-bottom: 10px;
+}
+
+.votes {
+    height: 10px;
+}
+
+.answer__count {
+    display: block;
+    border-radius: 1000px;
+    height: 30px;
+    width: 30px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    &.unanswered {
+        border: 2px solid #000;
+    }
+
+    &.answered {
+        border: 2px solid $indigo;
+        color: $indigo;
+    }
+
+    &.answer-accepted {
+        background: $indigo;
+        color: #fff;
+        border: none;
+    }
+
+    &-number {
+        font-size: 18px;
+        margin-top: -13px;
+    }
+}
+
+a {
+    &.vote_up,
+    &.vote_down
+    &.best_answer {
+        cursor: pointer;
+    }
+
+    &.answer_accepted {
+        color: $indigo;
+    }
+}
+
+.fa-caret-up, .fa-caret-down {
+    font-size: 50px;
+}
+
+.add_favorite {
+    margin-top: 20px;
+}
+
+.fa-star {
+    color: red;
+}
