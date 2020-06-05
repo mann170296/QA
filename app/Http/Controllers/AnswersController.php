@@ -78,4 +78,10 @@ class AnswersController extends Controller
             return redirect()->back();
         }
     }
+
+    public function accept(Answer $answer) {
+        $answer->question->acceptBestAnswer($answer->id);
+
+        return back();
+    }
 }

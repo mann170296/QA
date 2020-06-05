@@ -52,10 +52,15 @@
                         <a title="This question is not useful" class="vote_down mx-auto">
                             <i class="fas fa-caret-down fa-3x"></i>
                         </a>
-                        <a title="Mark as best answer" class="best_answer {{ $answer->bestAnswer }} mx-auto">
+                        <a title="Mark as best answer" class="best_answer {{ $answer->bestAnswer }} mx-auto"
+                            onclick="event.preventDefault(); document.getElementById('accept_answer_{{ $answer->id }}').submit();">
                             <i class="fas fa-check fa-2x"></i>
                         </a>
                     </div>
+
+                <form action="{{ route('answer.accept', $answer->id) }}" method="POST" id="accept_answer_{{ $answer->id }}" style="display: none">
+                        @csrf
+                    </form>
                 </div>
             </div>
             <br>

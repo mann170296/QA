@@ -45,4 +45,11 @@ class Question extends Model
 
         return "unanswered";
     }
+
+    // Accepts the answer as best answer
+    public function acceptBestAnswer($id) {
+        $this->best_answer_id = $id;
+
+        $this->save();
+    }
 }
