@@ -62,5 +62,16 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
+        // only question owner can accept a best answer (or an admin)
+        Gate::define('acceptAnswer', function($user, $question) {
+            if($user->role === 'admin') {
+                return true;
+            } else if($user->id === $question->user_id) {
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 }

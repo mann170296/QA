@@ -29,8 +29,17 @@ class Answer extends Model
     }
 
     public function getBestAnswerAttribute() {
-        if($this->id === $this->question->best_answer_id) {
+        if($this->isBest()) {
             return "answer_accepted";
         }
+    }
+
+    public function getIsBestAttribute() {
+        return $this->isBest();
+    }
+
+    // Checks if answer is best answer
+    public function isBest() {
+        return $this->id === $this->question->best_answer_id;
     }
 }

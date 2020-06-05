@@ -80,8 +80,11 @@ class AnswersController extends Controller
     }
 
     public function accept(Answer $answer) {
-        $answer->question->acceptBestAnswer($answer->id);
-
-        return back();
+        if(\Gate::allows('acceptAnswer', $answer->question)) {
+            $answer->question->acceptBestAnswer($answer->id);
+            return back();
+        } else {
+            return redirect()->back();
+        }
     }
 }
