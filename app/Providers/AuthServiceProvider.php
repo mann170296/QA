@@ -62,16 +62,5 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
-
-        // Authorize for deletion
-        Gate::define('deleteAnswer', function($user, $answer) {
-            // Set best answer ID to null if the best answer was deleted
-            if($answer->id === $answer->question->best_answer_id) {
-                $answer->question->best_answer_id = NULL;
-                $answer->question->save();
-            }
-
-            return true;
-        });
     }
 }

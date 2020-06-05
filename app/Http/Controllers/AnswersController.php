@@ -73,13 +73,9 @@ class AnswersController extends Controller
     public function destroy(Question $question, Answer $answer)
     {
         if(\Gate::allows('modifyAnswer', $answer)) {
-            if(\Gate::allows('deleteAnswer', $answer)) {
-                $answer->delete();
-
-                session()->flash('success', 'Your answer was deleted successfully');
-
-                return redirect()->back();
-            }
+            $answer->delete();
+            session()->flash('success', 'Your answer was deleted successfully');
+            return redirect()->back();
         }
     }
 }
