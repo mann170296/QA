@@ -31,7 +31,7 @@
                                 <div class="col-md-2">
                                     <div class="d-flex flex-column mx-auto">
                                         <div class="votes mx-auto">
-                                            <strong class="vote__count">{{ $question->votes }}</strong> {{ Str::plural('vote',$question->votes) }}
+                                            <strong class="vote__count">{{ $question->votes_count }}</strong> {{ Str::plural('vote',$question->votes_count) }}
                                         </div>
 
                                         <div class="status mx-auto">

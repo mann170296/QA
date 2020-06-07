@@ -42,4 +42,17 @@ class Answer extends Model
     public function isBest() {
         return $this->id === $this->question->best_answer_id;
     }
+
+    // Polymorphic
+    public function votes() {
+        return $this->morphToMany(User::class, 'votable');
+    }
+
+    public function upVote() {
+        return $this->votes()->wherePivot('vote', 1);
+    }
+
+    public function downVote() {
+        return $this->votes()->wherePivot('vote', -1);
+    }
 }

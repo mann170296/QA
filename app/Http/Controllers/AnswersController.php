@@ -87,4 +87,12 @@ class AnswersController extends Controller
             return redirect()->back();
         }
     }
+
+    public function vote(Answer $answer, Request $request) {
+        $vote = (int) $request->vote;
+
+        $user = auth()->user()->voteTheAnswer($answer, $vote);
+
+        return back();
+    }
 }

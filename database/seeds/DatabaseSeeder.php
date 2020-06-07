@@ -20,5 +20,9 @@ class DatabaseSeeder extends Seeder
                 $q->answers()->saveMany(factory(Answer::class, rand(1,5))->make());
             });
         });
+
+        $this->call([
+            VotablesTableSeeder::class,
+        ]);
     }
 }

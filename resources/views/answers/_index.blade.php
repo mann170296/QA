@@ -43,15 +43,31 @@
                 </div>
                 <div class="col-md-2">
                     <div class="d-flex flex-column mx-auto">
-                        <a title="This question is useful" class="vote_up mx-auto">
-                            <i class="fas fa-caret-up fa-3x"></i>
-                        </a>
+                        @auth
+                            <a title="This answer is useful" class="vote_up mx-auto"
+                            onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit()">
+                                <i class="fas fa-caret-up fa-3x"></i>
+                            </a>
+
+                            <form action="{{ route('answer.vote', $answer->id) }}" method="POST" id="up-vote-answer-{{ $answer->id }}" style="display: none">
+                                @csrf
+                                <input type="hidden" name="vote" value="1">
+                            </form>
+                        @endauth
                         <div class="votes mx-auto">
-                            <strong class="vote__count">{{ $answer->votes_count }}</strong> {{ Str::plural('vote',$question->votes) }}
+                            <strong class="vote__count">{{ $answer->votes_count }}</strong> {{ Str::plural('vote', $answer->votes_count) }}
                         </div>
-                        <a title="This question is not useful" class="vote_down mx-auto">
-                            <i class="fas fa-caret-down fa-3x"></i>
-                        </a>
+                        @auth
+                            <a title="This answer is not useful" class="vote_down mx-auto"
+                            onclick="event.preventDefault(); document.getElementById('down-vote-answer-{{ $answer->id }}').submit()">
+                                <i class="fas fa-caret-down fa-3x"></i>
+                            </a>
+
+                            <form action="{{ route('answer.vote', $answer->id) }}" method="POST" id="down-vote-answer-{{ $answer->id }}" style="display: none">
+                                @csrf
+                                <input type="hidden" name="vote" value="-1">
+                            </form>
+                        @endauth
                         @can('acceptAnswer', $answer->question)
                             <a title="Mark as best answer" class="best_answer {{ $answer->bestAnswer }} mx-auto"
                                 onclick="event.preventDefault(); document.getElementById('accept_answer_{{ $answer->id }}').submit();">
@@ -67,8 +83,8 @@
                     </div>
 
                 <form action="{{ route('answer.accept', $answer->id) }}" method="POST" id="accept_answer_{{ $answer->id }}" style="display: none">
-                        @csrf
-                    </form>
+                    @csrf
+                </form>
                 </div>
             </div>
             <br>

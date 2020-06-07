@@ -26,3 +26,7 @@ Route::resource('questions.answers', 'AnswersController')->except(['index', 'sho
 Route::get('/questions/{question:slug}', 'QuestionsController@show')->name('questions.show');
 
 Route::post('/answers/{answer}/accept', 'AnswersController@accept')->name('answer.accept');
+
+Route::post('/questions/{question}/vote', 'QuestionsController@vote')->name('question.vote')->middleware(['auth']);
+
+Route::post('/answers/{answer}/vote', 'AnswersController@vote')->name('answer.vote')->middleware(['auth']);

@@ -20,15 +20,31 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="d-flex flex-column mx-auto">
-                                <a title="This question is useful" class="vote_up mx-auto">
-                                    <i class="fas fa-caret-up fa-3x"></i>
-                                </a>
+                                @auth
+                                    <a title="This question is useful" class="vote_up mx-auto"
+                                         onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit()">
+                                        <i class="fas fa-caret-up fa-3x"></i>
+                                    </a>
+
+                                    <form action="{{ route('question.vote', $question->id) }}" method="POST" id="up-vote-question-{{ $question->id }}" style="display: none">
+                                        @csrf
+                                        <input type="hidden" name="vote" value="1">
+                                    </form>
+                                @endauth
                                 <div class="votes mx-auto">
-                                    <strong class="vote__count">{{ $question->votes }}</strong> {{ Str::plural('vote',$question->votes) }}
+                                    <strong class="vote__count">{{ $question->votes_count }}</strong> {{ Str::plural('vote',$question->votes_count) }}
                                 </div>
-                                <a title="This question is not useful" class="vote_down mx-auto">
-                                    <i class="fas fa-caret-down fa-3x"></i>
-                                </a>
+                                @auth
+                                    <a title="This question is not useful" class="vote_down mx-auto" style="cursor: pointer"
+                                    onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $question->id }}').submit()">
+                                        <i class="fas fa-caret-down fa-3x"></i>
+                                    </a>
+
+                                    <form action="{{ route('question.vote', $question->id) }}" method="POST" id="down-vote-question-{{ $question->id }}" style="display: none">
+                                        @csrf
+                                        <input type="hidden" name="vote" value="-1">
+                                    </form>
+                                @endauth
                                 <div class="views mx-auto">
                                     <span class="view__count">{{ $question->views }}</span>  {{ Str::plural('view',$question->views) }}
                                 </div>

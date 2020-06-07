@@ -131,4 +131,13 @@ class QuestionsController extends Controller
             return redirect()->back();
         }
     }
+
+    public function vote(Question $question, Request $request) {
+        $vote = (int) $request->vote;
+
+        $user = auth()->user()->voteTheQuestion($question, $vote);
+
+        return back();
+
+    }
 }
